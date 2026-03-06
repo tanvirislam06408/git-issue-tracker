@@ -23,7 +23,7 @@ const displayCard = (data) => {
     data.forEach(card => {
         const div = document.createElement("div");
         div.id = `border-${card.id}`
-        div.className = 'card bg-base-100 max-w-96 shadow-sm border-t-4 border-green-500'
+        div.className = 'card bg-base-100 max-w-96 shadow-sm border-t-4 border-green-500 h-full'
         div.innerHTML = `
          <div class="card-body">
 
@@ -48,7 +48,6 @@ const displayCard = (data) => {
         badgeParent.innerHTML = ""
         card.labels.forEach(l => {
             const badge = document.createElement('div');
-            // badge.classList.add('badge', 'bg-[#FFF8DB]', 'text-[#D97706]')
             if (l === "bug") {
                 badge.innerHTML = `
                                     <div class="badge bg-[#FEECEC] text-red-500"><img src="./assets/BugDroid.png" alt="">${l.toUpperCase()}
@@ -75,17 +74,26 @@ const displayCard = (data) => {
 
 
 
-        const dynamicPriority = document.getElementById(`card-${card.id}`);
+        // change border color depends on status
         const borderTop = document.getElementById(`border-${card.id}`);
-        if (card.priority === "medium") {
-            dynamicPriority.classList.remove('text-red-500', 'bg-[#FEECEC]');
-            dynamicPriority.classList.add('bg-[#FFF8DB]', 'text-[#D97706]')
+        if(card.status==='closed'){
+            borderTop.classList.remove('border-green-500');
+            borderTop.classList.add('border-[#A855F7]');
+        }
+        
+        // dynamic priority set
+        const dynamicPriority = document.getElementById(`card-${card.id}`);
+        if (card.priority === "high") {
+            dynamicPriority.classList.add('text-red-500', 'bg-[#FEECEC]');
+            dynamicPriority.classList.remove('bg-[#FFF8DB]', 'text-[#D97706]')
         }
         else if (card.priority === "low") {
             dynamicPriority.classList.remove('text-red-500', 'bg-[#FEECEC]');
-            borderTop.classList.remove('border-green-500');
-            borderTop.classList.add('border-[#A855F7]');
             dynamicPriority.classList.add('bg-gray-100', 'text-gray-500');
+        }
+        else{
+            dynamicPriority.classList.remove('text-red-500', 'bg-[#FEECEC]');
+            dynamicPriority.classList.add('bg-[#FFF8DB]', 'text-[#D97706]');
         }
         // dynamic bug fixed status
         const bugStatus = document.getElementById(`bug-${card.id}`);
