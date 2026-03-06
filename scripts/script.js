@@ -1,7 +1,7 @@
 // cards parent element
 const issueCards = document.getElementById('issueCards');
 // cards count
-const cardsCount=document.getElementById('cardsCount');
+const cardsCount = document.getElementById('cardsCount');
 const openIssues = [];
 const closedIssues = [];
 
@@ -17,7 +17,7 @@ const loadAllIssuesCard = async () => {
 
 const displayCard = (data) => {
     // dynamic cards count
-    cardsCount.innerText=data.length;
+    cardsCount.innerText = data.length;
     // created new element and append it
     issueCards.innerHTML = ""
     data.forEach(card => {
@@ -34,10 +34,8 @@ const displayCard = (data) => {
                         <h2 class="card-title">${card.title}</h2>
                         <p class="text-[#64748B]">${card.description}</p>
                         <div id="bug-${card.id}">
-                            <div class="badge bg-[#FEECEC] text-red-500"><img src="./assets/BugDroid.png" alt=""> BUG
+                            <div class="flex items-center gap-2" id="badgeParent-${card.id}">
                             </div>
-                            <div class="badge bg-[#FFF8DB] text-[#D97706]"><img src="./assets/Lifebuoy.png" alt=""> HELP
-                                WANTED</div>
                         </div>
                         <div class="card-actions justify-end border-t-2 border-gray-200 flex flex-col gap-1 mt-4 pt-5">
                             <p class="text-[#64748B] text-sm">${card.author}</p>
@@ -46,6 +44,36 @@ const displayCard = (data) => {
                     </div>
         `
         issueCards.appendChild(div)
+        const badgeParent = document.getElementById(`badgeParent-${card.id}`);
+        badgeParent.innerHTML = ""
+        card.labels.forEach(l => {
+            const badge = document.createElement('div');
+            // badge.classList.add('badge', 'bg-[#FFF8DB]', 'text-[#D97706]')
+            if (l === "bug") {
+                badge.innerHTML = `
+                                    <div class="badge bg-[#FEECEC] text-red-500"><img src="./assets/BugDroid.png" alt="">${l.toUpperCase()}
+                            </div>
+                                    `
+            }
+            else if (l === "enhancement") {
+                badge.innerHTML = `
+            <div class="badge  bg-green-100 text-green-600"><i class="fa-solid fa-wand-magic-sparkles"></i><span>${l.toUpperCase()}</span></div>
+            `
+            }
+            else if(l==="help wanted"){
+                badge.innerHTML=`
+                <div class="badge bg-[#FFF8DB] text-[#D97706]"><img src="./assets/Lifebuoy.png" alt="">${l.toUpperCase()}</div>
+                `
+            }
+            else {
+                badge.innerHTML = `
+            <div class="badge  bg-gray-100 text-gray-600"><i class="fa-solid fa-circle-exclamation"></i><span>${l.toUpperCase()}</span></div>
+            `
+            }
+            badgeParent.appendChild(badge);
+        })
+
+
 
         const dynamicPriority = document.getElementById(`card-${card.id}`);
         const borderTop = document.getElementById(`border-${card.id}`);
@@ -105,7 +133,7 @@ const btnToggle = (id) => {
     document.getElementById('btn-all').classList.remove('btn-primary', 'text-white');
     document.getElementById('btn-closed').classList.remove('btn-primary', 'text-white');
     document.getElementById('btn-open').classList.remove('btn-primary', 'text-white');
-    btn.classList.add("btn-primary","text-white");
+    btn.classList.add("btn-primary", "text-white");
 }
 
 
