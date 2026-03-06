@@ -13,7 +13,8 @@ const loadAllIssuesCard = async () => {
 const displayCard = (data) => {
     issueCards.innerHTML = ""
     data.forEach(card => {
-        const div = document.createElement("div")
+        const div = document.createElement("div");
+        div.id = `border-${card.id}`
         div.className = 'card bg-base-100 max-w-96 shadow-sm border-t-4 border-green-500'
         div.innerHTML = `
          <div class="card-body">
@@ -24,7 +25,7 @@ const displayCard = (data) => {
                         </div>
                         <h2 class="card-title">${card.title}</h2>
                         <p class="text-[#64748B]">${card.description}</p>
-                        <div>
+                        <div id="bug-${card.id}">
                             <div class="badge bg-[#FEECEC] text-red-500"><img src="./assets/BugDroid.png" alt=""> BUG
                             </div>
                             <div class="badge bg-[#FFF8DB] text-[#D97706]"><img src="./assets/Lifebuoy.png" alt=""> HELP
@@ -39,14 +40,30 @@ const displayCard = (data) => {
         issueCards.appendChild(div)
 
         const dynamicPriority = document.getElementById(`card-${card.id}`);
+        const borderTop = document.getElementById(`border-${card.id}`);
         if (card.priority === "medium") {
             dynamicPriority.classList.remove('text-red-500', 'bg-[#FEECEC]');
             dynamicPriority.classList.add('bg-[#FFF8DB]', 'text-[#D97706]')
         }
         else if (card.priority === "low") {
             dynamicPriority.classList.remove('text-red-500', 'bg-[#FEECEC]');
+            borderTop.classList.remove('border-green-500');
+            borderTop.classList.add('border-[#A855F7]');
             dynamicPriority.classList.add('bg-gray-100', 'text-gray-500');
         }
+        // dynamic bug fixed status
+        const bugStatus = document.getElementById(`bug-${card.id}`);
+        const statusBug = card.labels[0];
+        if (statusBug !== "bug") {
+            bugStatus.innerHTML = "";
+            bugStatus.innerHTML = `
+            <div class="badge  bg-green-100 text-green-600"><i class="fa-solid fa-wand-magic-sparkles"></i><span>ENHANCEMENT</span></div>
+            `
+        }
+
+
+
+
     });
 
 
