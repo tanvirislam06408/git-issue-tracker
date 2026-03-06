@@ -1,6 +1,7 @@
 // cards parent element
 const issueCards = document.getElementById('issueCards');
-
+// cards count
+const cardsCount=document.getElementById('cardsCount');
 const openIssues = [];
 const closedIssues = [];
 
@@ -15,6 +16,9 @@ const loadAllIssuesCard = async () => {
 }
 
 const displayCard = (data) => {
+    // dynamic cards count
+    cardsCount.innerText=data.length;
+    // created new element and append it
     issueCards.innerHTML = ""
     data.forEach(card => {
         const div = document.createElement("div");
