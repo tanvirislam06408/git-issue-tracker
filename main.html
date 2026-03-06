@@ -29,7 +29,7 @@
     <header class="bg-base-100">
         <nav class="navbar w-10/12 mx-auto">
             <div class="flex-1 flex items-center gap-3">
-                <div class="h-9 w-9">
+                <div class="h-9 w-9 mr-4 md:mr-0">
                     <img src="./assets/github-logo.png" alt="">
                 </div>
                 <h1 class="font-semibold text-2xl hidden md:block">GitHub Issues Tracker</h1>
@@ -46,9 +46,9 @@
         <section>
             <!-- dynamic btn -->
             <div class="shadow-xl mt-5 md:mt-20 bg-white p-6 rounded-xl space-x-4">
-                <button class="btn btn-primary">All</button>
-                <button class="btn text-gray-500">Open</button>
-                <button class="btn text-gray-500">Closed</button>
+                <button id="btn-all" class="btn btn-primary">All</button>
+                <button id="btn-open" class="btn text-gray-500">Open</button>
+                <button id="btn-closed" class="btn text-gray-500">Closed</button>
             </div>
 
         </section>

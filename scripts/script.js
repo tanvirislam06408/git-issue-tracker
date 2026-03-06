@@ -1,6 +1,10 @@
 // cards parent element
 const issueCards = document.getElementById('issueCards');
 
+const openIssues = [];
+const closedIssues = [];
+
+
 
 
 const loadAllIssuesCard = async () => {
@@ -60,7 +64,14 @@ const displayCard = (data) => {
             <div class="badge  bg-green-100 text-green-600"><i class="fa-solid fa-wand-magic-sparkles"></i><span>ENHANCEMENT</span></div>
             `
         }
+        // push openStatus data in array
+        if (card.status === "open") {
+            openIssues.push(card);
 
+        }
+        else {
+            closedIssues.push(card);
+        }
 
 
 
@@ -70,20 +81,28 @@ const displayCard = (data) => {
 }
 
 
+// button toggle
 
-// "id": 9,
-// "title": "Add export to PDF feature",
-// "description": "Users want to export reports and dashboards to PDF format for sharing and printing.",
-// "status": "open",
-// "labels": [
-// "enhancement"
-// ],
-// "priority": "medium",
-// "author": "feature_fred",
-// "assignee": "",
-// "createdAt": "2024-01-16T10:15:00Z",
-// "updatedAt": "2024-01-16T10:15:00Z"
+document.getElementById('btn-open').addEventListener('click', () => {
+    displayCard(openIssues);
+    btnToggle('btn-open');
+})
+document.getElementById('btn-closed').addEventListener('click', () => {
+    displayCard(closedIssues);
+    btnToggle('btn-closed');
+})
+document.getElementById('btn-all').addEventListener('click', () => {
+    loadAllIssuesCard();
+    btnToggle('btn-all');
+})
 
+const btnToggle = (id) => {
+    const btn = document.getElementById(id);
+    document.getElementById('btn-all').classList.remove('btn-primary', 'text-white');
+    document.getElementById('btn-closed').classList.remove('btn-primary', 'text-white');
+    document.getElementById('btn-open').classList.remove('btn-primary', 'text-white');
+    btn.classList.add("btn-primary","text-white");
+}
 
 
 
