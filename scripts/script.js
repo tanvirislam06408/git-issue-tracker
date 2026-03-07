@@ -144,7 +144,7 @@ document.getElementById('btn-open').addEventListener('click', () => {
     setTimeout(()=>{
         displayCard(openIssues)
         loading(false);
-    },500)
+    },200)
     btnToggle('btn-open');
 })
 document.getElementById('btn-closed').addEventListener('click', async() => {
@@ -152,7 +152,7 @@ document.getElementById('btn-closed').addEventListener('click', async() => {
     setTimeout(() => {
         displayCard(closedIssues);
         loading(false);   
-    }, 500);
+    }, 200);
     btnToggle('btn-closed');
 })
 document.getElementById('btn-all').addEventListener('click', () => {
