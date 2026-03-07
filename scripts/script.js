@@ -172,7 +172,7 @@ const displayModal = (data) => {
     <p class='mt-3 text-gray-500'>${data.description}</p>
 
     <div class='flex gap-30 mt-6 bg-gray-100 p-5 rounded-xl'>
-    <div class='font-bold text-sm'><p class='font-semibold mb-2 text-gray-500'>Assignee: </p> <p>${data.assignee}</p></div>
+    <div class='font-bold text-sm'><p class='font-semibold mb-2 text-gray-500'>Assignee: </p> <p>${data.author}</p></div>
     <div>
     <div class='font-bold text-sm'>
     <p class='font-semibold mb-2 text-gray-500'>Priority: </p>
