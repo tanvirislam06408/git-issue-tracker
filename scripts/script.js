@@ -244,8 +244,24 @@ const displayModal = (data) => {
 }
 
 
+// search function
+const loadSearchData=async(searchKey)=>{
+    
+const res=await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchKey}`);
+const data=await res.json();
+displayCard(data.data);
 
 
+}
+
+const input=document.getElementById('searchValue');
+input.addEventListener('keypress',(e)=>{
+if(e.key==='Enter'){
+    loadSearchData(input.value);
+    
+}
+
+})
 
 
 
