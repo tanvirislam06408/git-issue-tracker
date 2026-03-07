@@ -11,12 +11,23 @@ const closedIssues = [];
 const loadAllIssuesCard = async () => {
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const data = await res.json();
+    openIssues.length = 0;
+    closedIssues.length = 0;
+    data.data.forEach(card => {
+        if (card.status === "open") {
+            openIssues.push(card);
+        } else {
+            closedIssues.push(card);
+        }
+    });
     displayCard(data.data);
+
 
 }
 
 const displayCard = (data) => {
     // dynamic cards count
+    cardsCount.innerText = ''
     cardsCount.innerText = data.length;
     // created new element and append it
     issueCards.innerHTML = ""
@@ -104,14 +115,6 @@ const displayCard = (data) => {
             <div class="badge  bg-green-100 text-green-600"><i class="fa-solid fa-wand-magic-sparkles"></i><span>ENHANCEMENT</span></div>
             `
         }
-        // push openStatus data in array
-        if (card.status === "open") {
-            openIssues.push(card);
-
-        }
-        else {
-            closedIssues.push(card);
-        }
 
 
 
@@ -167,7 +170,7 @@ const displayModal = (data) => {
  
     <span>• Opened by ${data.assignee}</span> 
     <span>•${data.createdAt}</span></p>
-    <div id=labelModal-${data.id}>
+    <div id="labelModal-${data.id}">
     </div>
     <p class='mt-3 text-gray-500'>${data.description}</p>
 
