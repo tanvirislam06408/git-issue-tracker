@@ -7,13 +7,13 @@ const closedIssues = [];
 
 // loading 
 
-const loading=(value)=>{
-    if(value===true){
+const loading = (value) => {
+    if (value === true) {
         document.getElementById('issueCards').classList.add('hidden')
         document.getElementById('spnner').classList.add('flex')
         document.getElementById('spnner').classList.remove('hidden')
     }
-    else{
+    else {
         document.getElementById('spnner').classList.add('hidden')
         document.getElementById('spnner').classList.remove('flex')
         document.getElementById('issueCards').classList.remove('hidden')
@@ -57,9 +57,7 @@ const displayCard = (data) => {
                         </div>
                         <h2 class="card-title">${card.title}</h2>
                         <p class="text-[#64748B]">${card.description}</p>
-                        <div id="bug-${card.id}">
-                            <div class="flex items-center gap-2" id="badgeParent-${card.id}">
-                            </div>
+                            <div class="flex items-center flex-wrap gap-2" id="badgeParent-${card.id}">
                         </div>
                         <div class="card-actions justify-end border-t-2 border-gray-200 flex flex-col gap-1 mt-4 pt-5">
                             <p class="text-[#64748B] text-sm">${card.author}</p>
@@ -119,15 +117,6 @@ const displayCard = (data) => {
             dynamicPriority.classList.remove('text-red-500', 'bg-[#FEECEC]');
             dynamicPriority.classList.add('bg-[#FFF8DB]', 'text-[#D97706]');
         }
-        // dynamic bug fixed status
-        const bugStatus = document.getElementById(`bug-${card.id}`);
-        const statusBug = card.labels[0];
-        if (statusBug !== "bug") {
-            bugStatus.innerHTML = "";
-            bugStatus.innerHTML = `
-            <div class="badge  bg-green-100 text-green-600"><i class="fa-solid fa-wand-magic-sparkles"></i><span>ENHANCEMENT</span></div>
-            `
-        }
 
 
 
@@ -141,17 +130,17 @@ const displayCard = (data) => {
 
 document.getElementById('btn-open').addEventListener('click', () => {
     loading(true);
-    setTimeout(()=>{
+    setTimeout(() => {
         displayCard(openIssues)
         loading(false);
-    },200)
+    }, 200)
     btnToggle('btn-open');
 })
-document.getElementById('btn-closed').addEventListener('click', async() => {
+document.getElementById('btn-closed').addEventListener('click', async () => {
     loading(true);
     setTimeout(() => {
         displayCard(closedIssues);
-        loading(false);   
+        loading(false);
     }, 200);
     btnToggle('btn-closed');
 })
